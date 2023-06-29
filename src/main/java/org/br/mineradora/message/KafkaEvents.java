@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 @ApplicationScoped
 public class KafkaEvents {
 
-    private final Logger LOG = LoggerFactory.getLogger(KafkaEvents.class);
+    private final Logger log = LoggerFactory.getLogger(KafkaEvents.class);
 
     @Channel("quotation-channel") // Canal que tem acesso ao tópico do Kafka
     Emitter<QuotationDTO> quotationRequestEmitter; //Emissor que vai enviar msg para dentro do tópico Kafka
 
     public void sendNweKafkaEvent(QuotationDTO quotation){
 
-        LOG.info("-- Enviando Cotacao para Topico Kafka --");
+        log.info("-- Enviando Cotacao para Topico Kafka --");
         quotationRequestEmitter.send(quotation).toCompletableFuture().join();
     }
 }

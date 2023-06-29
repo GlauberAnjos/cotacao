@@ -13,7 +13,6 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @ApplicationScoped
 public class QuotationService {
@@ -49,12 +48,10 @@ public class QuotationService {
         List<QuotationEntity> quotationList = quotationRepository.findAll().list();
 
         if(quotationList.isEmpty()){
-
             saveQuotation(currencyPriceInfo);
             updatePrice = true;
         }
         else{
-
             QuotationEntity lastDollarPrice = quotationList
                     .get(quotationList.size() - 1);
 
@@ -73,6 +70,7 @@ public class QuotationService {
         quotation.setDate(new Date());
         quotation.setCurrencyPrice(new BigDecimal(currencyInfo.getUSDBRL().getBid()));
         quotation.setPctChange(currencyInfo.getUSDBRL().getPctChange());
+        quotation.setPair("USD-BRL");
 
         quotationRepository.persist(quotation);
     }

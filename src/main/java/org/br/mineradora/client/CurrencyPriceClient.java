@@ -8,7 +8,7 @@ import org.br.mineradora.dto.CurrencyPriceDTO;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/last")
-@RegisterRestClient //Serviço Rest
+@RegisterRestClient(baseUri="https://economia.awesomeapi.com.br") //Serviço Rest
 @ApplicationScoped //Contextualiza a Interface, informando que ela faz parte do Quarkus
 public interface CurrencyPriceClient {
 
